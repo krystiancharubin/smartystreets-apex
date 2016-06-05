@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/krystiancharubin/smartystreets-apex.svg?branch=master)](https://travis-ci.org/krystiancharubin/smartystreets-apex)
+[![Coverage Status](https://coveralls.io/repos/github/krystiancharubin/smartystreets-apex/badge.svg?branch=master)](https://coveralls.io/github/krystiancharubin/smartystreets-apex?branch=master)
 
 # SmartyStreets [![Deploy to Salesforce](https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png)](https://githubsfdeploy.herokuapp.com)
 
