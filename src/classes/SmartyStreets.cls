@@ -193,11 +193,16 @@ global class SmartyStreets {
 		String dst;
 	}
 
-	enum DVPMatchCode { Y, N, S, D }
-
 	public class AddressAnalysis {
-		DVPMatchCode dvp_match_code;
+		String dvp_match_code;
 		String dvp_footnotes;
+		String dvp_cmra;
+		String active;
+		String es_match;
+		String footnotes;
+		String lacslink_code;
+		String lacslink_indicator;
+		String suitelink_match;
 	}
 
 

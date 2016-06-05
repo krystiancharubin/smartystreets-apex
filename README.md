@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/krystiancharubin/smartystreets-apex.svg?branch=master)](https://travis-ci.org/krystiancharubin/smartystreets-apex)
+
 # SmartyStreets
 SmartyStreets API Wrapper for Apex
 
