@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/krystiancharubin/smartystreets-apex.svg?branch=master)](https://travis-ci.org/krystiancharubin/smartystreets-apex)
 
-# SmartyStreets
+# SmartyStreets [![Deploy to Salesforce](https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png)](https://githubsfdeploy.herokuapp.com)
+
 SmartyStreets API Wrapper for Apex
 
 Wraps the Street Address API

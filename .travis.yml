@@ -3,9 +3,7 @@ python: "2.7"
 sudo: false
 branches:
      only:
-          - master
+       - master
 before_script: ./build/scripts/setup_credentials.sh
 script: ./build/scripts/deploy.sh
-addons:
-    code_climate:
-        repo_token: a6072ddc3def025854060b42a99888806eb465f32ad852e4a883ff285dd3d969
+after_success: ./build/scripts/run_tests.sh
