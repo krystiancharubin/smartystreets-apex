@@ -3,6 +3,10 @@
 !/src
 !/src/*
 /src/package.xml
+!/build
+!/build/*
 !.gitignore
+!.gitmodules
+!.travis.yml
 !README.md
 !LICENSE.md
