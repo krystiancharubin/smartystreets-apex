@@ -2,7 +2,6 @@
 **.DS_Store
 !/src
 !/src/*
-/src/package.xml
 !/build
 !/build/*
 !.gitignore
