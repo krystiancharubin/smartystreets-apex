@@ -73,7 +73,7 @@ global class SmartyStreets {
     Object params,
     Type responseType
   ){
-    // if(Test.isRunningTest()) Test.setMock(HttpCalloutMock.class, new SendWithUs_Mock());
+    if(Test.isRunningTest()) Test.setMock(HttpCalloutMock.class, new SmartyStreetsMock());
 
     Http http = new Http();
     HttpRequest req = createConnection(url, method, params);
@@ -107,7 +107,8 @@ global class SmartyStreets {
   }
 
   public AddressResponse street_address(AddressRequest request){
-    return this.street_address(new List<AddressRequest>{request})[0];
+		List<AddressResponse> addrRess = this.street_address(new List<AddressRequest>{request});
+    return addrRess.isEmpty() ? null : addrRess[0];
   }
 
   private void debug(Object obj){
@@ -134,38 +135,44 @@ global class SmartyStreets {
 	}
 
 	public class AddressResponse {
-		String input_id;
-		Integer input_index;
-		Integer candidate_index;
-		String addressee;
-		String delivery_line_1;
-		String delivery_line_2;
-		String last_line;
-		String delivery_point_barcode;
-		AddressComponent components;
-		AddressMetadata metadata;
-		AddressAnalysis analysis;
+		public String input_id;
+		public Integer input_index;
+		public Integer candidate_index;
+		public String addressee;
+		public String delivery_line_1;
+		public String delivery_line_2;
+		public String last_line;
+		public String delivery_point_barcode;
+		public AddressComponent components;
+		public AddressMetadata metadata;
+		public AddressAnalysis analysis;
+
+		public AddressResponse(){
+			this.components = new AddressComponent();
+			this.metadata = new AddressMetadata();
+			this.analysis = new AddressAnalysis();
+		}
 	}
 
 	public class AddressComponent {
-		String urbanization;
-		String primary_number;
-		String street_name;
-		String street_predirection;
-		String street_postdirection;
-		String street_suffix;
-		String secondary_number;
-		String secondary_designator;
-		String extra_secondary_number;
-		String extra_secondary_designator;
-		String pmb_designator;
-		String pmb_number;
-		String city_name;
-		String default_city_name;
-		String state_abbreviation;
-		String zipccode;
-		String delivery_point;
-		String delivery_point_check_digit;
+		public String urbanization;
+		public String primary_number;
+		public String street_name;
+		public String street_predirection;
+		public String street_postdirection;
+		public String street_suffix;
+		public String secondary_number;
+		public String secondary_designator;
+		public String extra_secondary_number;
+		public String extra_secondary_designator;
+		public String pmb_designator;
+		public String pmb_number;
+		public String city_name;
+		public String default_city_name;
+		public String state_abbreviation;
+		public String zipcode;
+		public String delivery_point;
+		public String delivery_point_check_digit;
 	}
 
 	enum RecordType { F, G, H, P, R, S }
@@ -175,34 +182,34 @@ global class SmartyStreets {
 	enum Precision { Unknown, None, State, SolutionArea, City, Zip5, Zip6, Zip8, Zip9, Structure }
 
 	public class AddressMetadata {
-		RecordType record_type;
-		ZipType zip_type;
-		String county_fips;
-		String country_name;
-		String currier_route;
-		String congressional_district;
-		String building_default_indicator;
-		RDI rdi;
-		String elot_sequence;
-		ElotSort elot_sort;
-		Decimal latitude;
-		Decimal longitude;
-		Precision precision;
-		String time_zone;
-		Decimal utc_offset;
-		String dst;
+		public RecordType record_type;
+		public ZipType zip_type;
+		public String county_fips;
+		public String country_name;
+		public String currier_route;
+		public String congressional_district;
+		public String building_default_indicator;
+		public RDI rdi;
+		public String elot_sequence;
+		public ElotSort elot_sort;
+		public Decimal latitude;
+		public Decimal longitude;
+		public Precision precision;
+		public String time_zone;
+		public Decimal utc_offset;
+		public String dst;
 	}
 
 	public class AddressAnalysis {
-		String dvp_match_code;
-		String dvp_footnotes;
-		String dvp_cmra;
-		String active;
-		String es_match;
-		String footnotes;
-		String lacslink_code;
-		String lacslink_indicator;
-		String suitelink_match;
+		public String dvp_match_code;
+		public String dvp_footnotes;
+		public String dvp_cmra;
+		public String active;
+		public String es_match;
+		public String footnotes;
+		public String lacslink_code;
+		public String lacslink_indicator;
+		public String suitelink_match;
 	}
 
 
