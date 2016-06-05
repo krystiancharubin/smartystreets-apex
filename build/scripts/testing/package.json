@@ -11,6 +11,7 @@
         "jsforce": "jsforce/jsforce",
         "q": "*",
         "lodash": "*",
-        "restler": "*"
+        "restler": "*",
+        "md5": "*"
     }
 }

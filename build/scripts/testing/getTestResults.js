@@ -6,6 +6,7 @@ var fs = require('fs');
 var lo = require('lodash');
 var jsforce = require('jsforce');
 var restler = require('restler');
+var md5 = require('md5');
 
 /** The salesforce client */
 var sfdc_client = new jsforce.Connection({loginUrl : process.env.SFDC_URL});
@@ -46,27 +47,26 @@ var buildClassIdToClassDataMap = function () {
 
 	var class_data = {},
 		deferred = Q.defer(),
-		path_template = lo.template('src/classes/<%= FullName %>.cls');
+		path_template = lo.template('src/classes/<%= Name %>.cls');
 
 	console.log('Fetching class information');
 
-	sfdc_client.tooling.sobject('ApexClassMember').find({}).execute(function (error, data) {
+	sfdc_client.tooling.sobject('ApexClass').find({}, ['Id', 'Name', 'Body']).execute(function (error, data) {
 		if (error) {
 			deferred.reject(new Error(error));
 		} else {
 			console.log('Got information about ' + lo.size(data) + ' classes');
-
 			lo.forEach(data, function (row) {
 				if (row.Body.indexOf('@isTest') === -1) {
 					id_to_class_map[row.Id] = {
 						name: path_template(row),
-						source: row.Body,
+						source_digest: md5(row.Body),
 						coverage: []
 					};
 				} else {
 					test_class_map[row.Id] = {
 						name: path_template(row),
-						source: row.Body
+						source_digest: md5(row.Body)
 					};
 				}
 			});
@@ -84,12 +84,8 @@ var buildClassIdToClassDataMap = function () {
 var runAllTests = function () {
 	'use strict';
 
-	console.log(test_class_map);
-
 	var class_ids = lo.keys(test_class_map),
 		deferred = Q.defer();
-
-	console.log(class_ids);
 
 	sfdc_client.tooling.runTestsAsynchronous(class_ids, function (error, data) {
 		if (error) {
@@ -235,6 +231,8 @@ var postToCoveralls = function () {
 			restler.post('https://coveralls.io/api/v1/jobs', post_options).on("complete", function (data) {
 				deferred.resolve();
 			});
+
+			deferred.resolve();
 		}
 	});
 
