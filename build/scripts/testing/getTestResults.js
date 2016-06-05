@@ -84,8 +84,12 @@ var buildClassIdToClassDataMap = function () {
 var runAllTests = function () {
 	'use strict';
 
+	console.log(test_class_map);
+
 	var class_ids = lo.keys(test_class_map),
 		deferred = Q.defer();
+
+	console.log(class_ids);
 
 	sfdc_client.tooling.runTestsAsynchronous(class_ids, function (error, data) {
 		if (error) {
