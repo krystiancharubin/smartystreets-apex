@@ -50,7 +50,7 @@ var buildClassIdToClassDataMap = function () {
 
 	console.log('Fetching class information');
 
-	sfdc_client.tooling.sobject('ApexClass').find({}).execute(function (error, data) {
+	sfdc_client.tooling.sobject('ApexClassMember').find({}).execute(function (error, data) {
 		if (error) {
 			deferred.reject(new Error(error));
 		} else {
