@@ -51,13 +51,13 @@ var buildClassIdToClassDataMap = function () {
 
 	console.log('Fetching class information');
 
-	sfdc_client.tooling.sobject('ApexClass').find({}, ['Id', 'Name', 'Body']).execute(function (error, data) {
+	sfdc_client.tooling.sobject('ApexClass').find({}, ['Id', 'Name', 'Body', 'SymbolTable']).execute(function (error, data) {
 		if (error) {
 			deferred.reject(new Error(error));
 		} else {
 			console.log('Got information about ' + lo.size(data) + ' classes');
 			lo.forEach(data, function (row) {
-				if (row.Body.indexOf('@isTest') === -1) {
+				if (!lo.includes(row.SymbolTable.tableDeclaration.annotations, 'IsTest')) {
 					id_to_class_map[row.Id] = {
 						name: path_template(row),
 						source_digest: md5(row.Body),
